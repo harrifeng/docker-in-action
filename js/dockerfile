@@ -1,0 +1,31 @@
+FROM ubuntu:16.04
+
+ENV http_proxy http://proxy.sin.sap.corp:8080
+ENV https_proxy http://proxy.sin.sap.corp:8080
+
+RUN apt-get update && \
+DEBIAN_FRONTEND=noninteractive apt-get -y install \
+tmux \
+tmuxinator \
+emacs \
+git \
+curl \
+python-dev
+
+# For nodejs
+RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
+RUN apt-get install -y nodejs
+
+RUN pip install powerline-status psutil
+
+WORKDIR /github
+RUN git clone https://github.com/harrifeng/fonts.git /github/fonts
+RUN /github/fonts/install.sh
+RUN git clone https://github.com/harrifeng/dotfiles.git /github/dotfiles
+RUN rm -f /root/.bashrc
+RUN ln -s /github/dotfiles /root/.bashrc
+RUN ln -s /github/dotfiles/linux /root/.tumxinator
+
+RUN git clone https://github.com/harrifeng/dotemacsd.git /github/dotemacsd
+RUN ln -s /github/dotemacs /root/.emacs.d
+RUN emacs --batch --eval '(byte-recompile-directory "~/.emacs.d")'
