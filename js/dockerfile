@@ -10,6 +10,7 @@ tmuxinator \
 emacs \
 git \
 curl \
+python-pip \
 python-dev
 
 # For nodejs
