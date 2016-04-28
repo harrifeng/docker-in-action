@@ -24,9 +24,9 @@ RUN git clone https://github.com/harrifeng/fonts.git /github/fonts
 RUN /github/fonts/install.sh
 RUN git clone https://github.com/harrifeng/dotfiles.git /github/dotfiles
 RUN rm -f /root/.bashrc
-RUN ln -s /github/dotfiles /root/.bashrc
+RUN ln -s /github/dotfiles/bash/proxy.bashrc /root/.bashrc
+RUN ln -s /github/dotfiles/tmux/tmux.conf /root/.tmux.conf
 RUN ln -s /github/dotfiles/linux /root/.tumxinator
 
-RUN git clone https://github.com/harrifeng/dotemacsd.git /github/dotemacsd
-RUN ln -s /github/dotemacs /root/.emacs.d
+RUN git clone https://github.com/harrifeng/dotemacsd.git /root/.emacs.d
 RUN emacs --batch --eval '(byte-recompile-directory "~/.emacs.d")'
