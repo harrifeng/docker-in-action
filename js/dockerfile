@@ -32,3 +32,5 @@ RUN ln -s /github/dotfiles/linux /root/.tumxinator
 RUN git clone https://github.com/harrifeng/dotemacsd.git
 RUN ln -s /github/dotemacsd /root/.emacs.d
 RUN emacs --batch -l ~/.emacs.d/config/helpfunc-setting.el -f install-my-packages
+# npm packages, may growing later
+RUN npm install -g js-beautify webpack tern
