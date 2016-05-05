@@ -1,0 +1,30 @@
+FROM ubuntu:16.04
+
+ENV http_proxy http://proxy.sin.sap.corp:8080
+ENV https_proxy http://proxy.sin.sap.corp:8080
+
+RUN apt-get update && \
+DEBIAN_FRONTEND=noninteractive apt-get -y install \
+tmux \
+tmuxinator \
+emacs \
+git \
+curl \
+python-pip \
+python-dev
+
+RUN pip install powerline-status psutil
+
+WORKDIR /github
+RUN git clone https://github.com/harrifeng/fonts.git
+RUN /github/fonts/install.sh
+
+RUN git clone https://github.com/harrifeng/dotfiles.git
+RUN rm -f /root/.bashrc
+RUN ln -s /github/dotfiles/bash/proxy.bashrc /root/.bashrc
+RUN ln -s /github/dotfiles/tmux/tmux.conf /root/.tmux.conf
+RUN ln -s /github/dotfiles/linux /root/.tumxinator
+
+RUN git clone https://github.com/harrifeng/dotemacsd.git
+RUN ln -s /github/dotemacsd /root/.emacs.d
+RUN emacs --batch -l ~/.emacs.d/config/helpfunc-setting.el -f install-my-packages
