@@ -5,6 +5,7 @@ ENV https_proxy http://proxy.sin.sap.corp:8080
 
 RUN apt-get update && \
 DEBIAN_FRONTEND=noninteractive apt-get -y install \
+silversearcher-ag \
 tmux \
 tmuxinator \
 emacs \
@@ -13,7 +14,7 @@ curl \
 python-pip \
 python-dev
 
-RUN pip install powerline-status psutil
+RUN pip install powerline-status psutil rope flake8 importmagic autopep8 yapf flask
 
 WORKDIR /github
 RUN git clone https://github.com/harrifeng/fonts.git

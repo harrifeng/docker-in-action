@@ -5,6 +5,7 @@ ENV https_proxy http://proxy.sin.sap.corp:8080
 
 RUN apt-get update && \
 DEBIAN_FRONTEND=noninteractive apt-get -y install \
+silversearcher-ag \
 tmux \
 tmuxinator \
 emacs \
