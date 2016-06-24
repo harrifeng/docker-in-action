@@ -22,7 +22,7 @@ RUN apt-get install -y nodejs
 RUN npm install -g js-beautify webpack tern
 
 
-WORKDIR /root/github
+WORKDIR /github
 
 RUN git clone https://github.com/harrifeng/dotfiles.git
 RUN rm -f /root/.bashrc
